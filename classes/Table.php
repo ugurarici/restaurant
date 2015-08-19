@@ -1,10 +1,27 @@
 <?php
-class Table
+class Table extends Connection
 {
-    private $con;
+    var $id;
+    var $name;
+    var $status;
 
-    function __construct(){
-        $this->con = new PDO("mysql:host=localhost;dbname=restaurant;charset=UTF8;", "root", "");
+    function __construct($id = NULL){
+        parent::__construct();
+        if(!is_null($id)) $this->initializeById($id);
+    }
+
+    public static function find($id){
+        return new Table($id);
+    }
+
+    function initializeById($id){
+        if($table = $this->getOne($id)){
+            $this->id = $table['id'];
+            $this->name = $table['name'];
+            $this->status = $table['status'];
+        }else{
+            die ($id. " idli masa bulunmuyor.");
+        }
     }
 
     public function getAllTables(){
@@ -12,8 +29,10 @@ class Table
         return $tables;
     }
 
-    public function getOne($tableId){
-        $table = $this->con->query("SELECT * FROM tables WHERE id = ". $tableId)->fetch(PDO::FETCH_ASSOC);
+    private function getOne($tableId){
+        $query = $this->con->prepare("SELECT * FROM tables WHERE id = ?");
+        $query->execute(array($tableId));
+        $table = $query->fetch(PDO::FETCH_ASSOC);
         return $table;
     }
     // masa ekeleme

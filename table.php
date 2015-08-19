@@ -2,9 +2,8 @@
 function __autoload($className){
     require_once "classes/".$className.".php";
 }
-$tblObj = new Table();
-$table = $tblObj->getOne($_GET['id']);
-if(! $table) die("Boyle bir masa yok.");
+
+$table = Table::find($_GET['id']);
 
 $menu = array(
     "Yemekler" => array(
@@ -94,7 +93,7 @@ $orderedItems = array(
         </table>
     </div>
     <div class="col-sm-6">
-        <h1>Masa <?=$table['name']?></h1>
+        <h1>Masa <?=$table->name?></h1>
         <table class="table">
             <th>Sipariş Edilenler<span class="pull-right"><?=count($orderedItems)?> Ürün</span></th>
             <?php
