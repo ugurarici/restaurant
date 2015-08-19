@@ -1,21 +1,21 @@
 <?php
-
 class Table
 {
-    public static function getAllTables(){
-        $connection = mysql_connect("localhost", "root" ,"");
-        mysql_select_db("restaurant", $connection);
-        $tablesQuery = mysql_query("SELECT * FROM tables");
+    private $con;
 
-        $tables = array();
+    function __construct(){
+        $this->con = new PDO("mysql:host=localhost;dbname=restaurant;charset=UTF8;", "root", "");
+    }
 
-        while(($row =  mysql_fetch_assoc($tablesQuery))) {
-            $tables[] = $row;
-        }
-
+    public function getAllTables(){
+        $tables = $this->con->query("SELECT * FROM tables");
         return $tables;
     }
 
+    public function getOne($tableId){
+        $table = $this->con->query("SELECT * FROM tables WHERE id = ". $tableId)->fetch(PDO::FETCH_ASSOC);
+        return $table;
+    }
     // masa ekeleme
     // masa düzenleme
     // masa silme
@@ -24,5 +24,5 @@ class Table
     // masanın adı
     // masanın durumu
     // masanın siparişi
-        // sipariş durumu
+    // sipariş durumu
 }

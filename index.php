@@ -5,6 +5,14 @@
 // masalar - class Table
 // sipariş - class Order
 // menü - class Menu
+
+
+function __autoload($className){
+    require_once "classes/".$className.".php";
+}
+
+$tblObj = new Table();
+
 ?>
 <!doctype html>
 <html lang="tr">
@@ -17,12 +25,12 @@
 <br>
     <div class="container">
         <?php
-        for($i=1; $i<=20; $i++):
+        foreach($tblObj->getAllTables() as $table):
             $btnClass = "btn-default";
-            if($i%3==0) $btnClass = "btn-info";
+            if($table['status']==1) $btnClass = "btn-info";
         ?>
-        <a href="table.php?id=<?=$i?>" class="btn <?=$btnClass?> btn-lg col-sm-3 col-xs-6"><?=$i?></a>
-        <?php endfor; ?>
+        <a href="table.php?id=<?=$table['id']?>" class="btn <?=$btnClass?> btn-lg col-sm-3 col-xs-6"><?=$table['name']?></a>
+        <?php endforeach; ?>
     </div>
 </body>
 </html>
