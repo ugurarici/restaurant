@@ -1,12 +1,6 @@
 <?php
-class Table
+class Table extends Connection
 {
-    private $con;
-
-    function __construct(){
-        $this->con = new PDO("mysql:host=localhost;dbname=restaurant;charset=UTF8;", "root", "");
-    }
-
     public function getAllTables(){
         $tables = $this->con->query("SELECT * FROM tables");
         return $tables;
