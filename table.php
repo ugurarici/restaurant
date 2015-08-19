@@ -6,39 +6,8 @@ $tblObj = new Table();
 $table = $tblObj->getOne($_GET['id']);
 if(! $table) die("Boyle bir masa yok.");
 
-$menu = array(
-    "Yemekler" => array(
-        "1" => array(
-            "id" => "1",
-            "name" => "Kuru",
-            "price" => 5.5,
-        ),
-        "2" => array(
-            "id" => "2",
-            "name" => "Pilav",
-            "price" => 3,
-        ),
-    ),
-    "İçecekler" => array(
-        "3" => array(
-            "id" => "3",
-            "name" => "Su",
-            "price" => 0.75,
-        ),
-        "4" => array(
-            "id" => "4",
-            "name" => "Kola",
-            "price" => 2.3,
-        ),
-    ),
-    "Tatlılar" => array(
-        "5" => array(
-            "id" => "5",
-            "name" => "Künefe",
-            "price" => 12.5,
-        ),
-    ),
-);
+$menuObj = new Menu();
+$menu = $menuObj->getFullMenu();
 
 $orderedItems = array(
     "35" => array(
