@@ -1,7 +1,6 @@
 <?php
-function __autoload($className){
-    require_once "classes/".$className.".php";
-}
+require_once "inc/global.php";
+
 $tblObj = new Table();
 $table = $tblObj->getOne($_GET['id']);
 if(! $table) die("Boyle bir masa yok.");
@@ -9,23 +8,8 @@ if(! $table) die("Boyle bir masa yok.");
 $menuObj = new Menu();
 $menu = $menuObj->getFullMenu();
 
-$orderedItems = array(
-    "35" => array(
-        "id" => "1",
-        "name" => "Kuru",
-        "price" => 5.5,
-    ),
-    "36" => array(
-        "id" => "2",
-        "name" => "Pilav",
-        "price" => 3,
-    ),
-    "37" => array(
-        "id" => "4",
-        "name" => "Kola",
-        "price" => 2.3,
-    ),
-);
+$orderObj = new Order();
+$orderedItems = $orderObj->getTableOrderedItems($table['id']);
 ?>
 <!doctype html>
 <html lang="tr">
@@ -54,7 +38,7 @@ $orderedItems = array(
                                 <td>
                                     <?=$urun['name']?>
                                     <span class="pull-right"><?=$urun['price']?> TL
-                                    <button class="btn btn-primary">+</button>
+                                    <a href="addProductToTable.php?productId=<?=$urun['id']?>&tableId=<?=$table['id']?>" class="btn btn-primary">+</a>
                                     </span>
                                 </td>
                             </tr>
@@ -69,13 +53,13 @@ $orderedItems = array(
             <?php
             $totalPrice = 0.0;
             foreach($orderedItems as $id => $urun):
-                $totalPrice += $urun['price'];
+                $totalPrice += $urun['product_price'];
                 ?>
                 <tr>
                     <td>
-                        <?=$urun['name']?>
-                        <span class="pull-right"><?=$urun['price']?> TL
-                                    <button class="btn btn-danger">-</button>
+                        <?=$urun['product_name']?>
+                        <span class="pull-right"><?=$urun['product_price']?> TL
+                                    <a href="deleteProductFromOrder.php?orderProductId=<?=$urun['id']?>&tableId=<?=$table['id']?>" class="btn btn-danger">-</a>
                                     </span>
                     </td>
                 </tr>
@@ -84,11 +68,13 @@ $orderedItems = array(
                 <th>Toplam Tutar <span class="pull-right"><?=$totalPrice?> TL</span></th>
             </tr>
         </table>
+        <?php if(count($orderedItems)>0): ?>
         <button class="btn btn-danger col-xs-6">İptal Et</button>
         <button class="btn btn-info col-xs-6">Taşı</button>
         <br>
         <br>
         <button class="btn btn-success btn-block">Hesabı Kapat</button>
+        <?php endif; ?>
     </div>
 </div>
 </body>

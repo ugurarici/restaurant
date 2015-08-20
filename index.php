@@ -7,14 +7,9 @@
 // menü - class Menu
 
 
-function __autoload($className){
-    require_once "classes/".$className.".php";
-}
+require_once "inc/global.php";
 
 $tblObj = new Table();
-
-$orderCont = new Order();
-$orderCont->addProductToTableOrder(1, 6);
 
 ?>
 <!doctype html>
