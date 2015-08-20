@@ -13,6 +13,9 @@ function __autoload($className){
 
 $tblObj = new Table();
 
+$orderCont = new Order();
+$orderCont->addProductToTableOrder(1, 6);
+
 ?>
 <!doctype html>
 <html lang="tr">
