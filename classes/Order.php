@@ -67,6 +67,25 @@ class Order extends Connection
         return false;
     }
 
+    public function cancelTableOrder($tableId){
+        // masa siparişini yakala
+        if( $orderId = $this->isTableHaveOrder($tableId) ){
+            // masa siparişini sil
+            $this->deleteOrder($orderId);
+            $tableCont = new Table();
+            $tableCont->deactive($tableId);
+        }
+    }
+
+    private function deleteOrder($orderId){
+        $deleteOrder = $this->con->exec("DELETE FROM orders WHERE id=".$orderId);
+        $deleteProducts = $this->con->exec("DELETE FROM order_products WHERE order_id=".$orderId);
+        if($deleteOrder && $deleteProducts){
+            return true;
+        }
+        return false;
+    }
+
     // sipariş ekleme
     // siparişe ürün ekleme
     // siparişten ürün silme

@@ -12,6 +12,9 @@ switch($_GET['task']){
         // siparişten ürün silme
         $orderCont->deleteProductFromOrder($_GET['orderProductId']);
         break;
+    case "cancel":
+        $orderCont->cancelTableOrder($_GET["tableId"]);
+        break;
 }
 
 header("Location: table.php?id=".$_GET['tableId'] );

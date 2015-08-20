@@ -68,12 +68,22 @@ $orderedItems = $orderObj->getTableOrderedItems($table['id']);
                 <th>Toplam Tutar <span class="pull-right"><?=$totalPrice?> TL</span></th>
             </tr>
         </table>
+        <?php if($table["status"]=="1"): ?>
+        <?php
+            $cancelStyle = "btn btn-danger ";
+            if(count($orderedItems)>0){
+                $cancelStyle .= "col-xs-6";
+            }else{
+                $cancelStyle .= "btn-block";
+            }
+        ?>
+        <a class="<?=$cancelStyle?>" href="orderTasks.php?task=cancel&tableId=<?=$table["id"]?>">İptal Et</a>
         <?php if(count($orderedItems)>0): ?>
-        <button class="btn btn-danger col-xs-6">İptal Et</button>
         <button class="btn btn-info col-xs-6">Taşı</button>
         <br>
         <br>
         <button class="btn btn-success btn-block">Hesabı Kapat</button>
+        <?php endif; ?>
         <?php endif; ?>
     </div>
 </div>
