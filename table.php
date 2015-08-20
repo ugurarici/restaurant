@@ -38,7 +38,7 @@ $orderedItems = $orderObj->getTableOrderedItems($table['id']);
                                 <td>
                                     <?=$urun['name']?>
                                     <span class="pull-right"><?=$urun['price']?> TL
-                                    <a href="addProductToTable.php?productId=<?=$urun['id']?>&tableId=<?=$table['id']?>" class="btn btn-primary">+</a>
+                                    <a href="orderTasks.php?task=add&productId=<?=$urun['id']?>&tableId=<?=$table['id']?>" class="btn btn-primary">+</a>
                                     </span>
                                 </td>
                             </tr>
@@ -59,7 +59,7 @@ $orderedItems = $orderObj->getTableOrderedItems($table['id']);
                     <td>
                         <?=$urun['product_name']?>
                         <span class="pull-right"><?=$urun['product_price']?> TL
-                                    <a href="deleteProductFromOrder.php?orderProductId=<?=$urun['id']?>&tableId=<?=$table['id']?>" class="btn btn-danger">-</a>
+                                    <a href="orderTasks.php?task=delete&orderProductId=<?=$urun['id']?>&tableId=<?=$table['id']?>" class="btn btn-danger">-</a>
                                     </span>
                     </td>
                 </tr>
