@@ -79,10 +79,10 @@ $orderedItems = $orderObj->getTableOrderedItems($table['id']);
         ?>
         <a class="<?=$cancelStyle?>" href="orderTasks.php?task=cancel&tableId=<?=$table["id"]?>">İptal Et</a>
         <?php if(count($orderedItems)>0): ?>
-        <button class="btn btn-info col-xs-6">Taşı</button>
+        <a href="selectNewTable.php?fromTableId=<?=$table['id']?>" class="btn btn-info col-xs-6">Taşı</a>
         <br>
         <br>
-        <button class="btn btn-success btn-block">Hesabı Kapat</button>
+        <a href="orderTasks.php?task=finish&tableId=<?=$table['id']?>" class="btn btn-success btn-block">Hesabı Kapat</a>
         <?php endif; ?>
         <?php endif; ?>
     </div>

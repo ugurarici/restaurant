@@ -11,12 +11,20 @@ class Table extends Connection
         return $table;
     }
 
-    public function deactive($tableId){
-        $deactive = $this->con->query("UPDATE tables SET status=0 WHERE id=".$tableId);
-        if($deactive){
+    private function changeStatus($tableId, $status){
+        $chst = $this->con->query("UPDATE tables SET status=".$status." WHERE id=".$tableId);
+        if($chst){
             return true;
         }
         return false;
+    }
+
+    public function deactive($tableId){
+        return $this->changeStatus($tableId, 0);
+    }
+
+    public function active($tableId){
+        return $this->changeStatus($tableId, 1);
     }
     // masa ekeleme
     // masa düzenleme

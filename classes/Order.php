@@ -86,6 +86,30 @@ class Order extends Connection
         return false;
     }
 
+    public function moveTableOrder($fromTableId, $toTableId){
+        // siparişin table_id'sini değiştireceğiz
+        if( $orderId = $this->isTableHaveOrder($fromTableId) ){
+            $moveQ = $this->con->prepare("UPDATE orders SET table_id = :toTableId WHERE id = :orderId");
+            //$moveQ->execute(array("toTableId" => $toTableId, "orderId" => $orderId));
+            $moveQ->execute(compact("toTableId", "orderId"));
+            // $fromTable pasif edilecek
+            $tblCont = new Table();
+            $tblCont->deactive($fromTableId);
+            // $toTable Aktif edilecek
+            $tblCont->active($toTableId);
+        }
+    }
+
+    public function closeTableOrder($tableId){
+        // table üstündeki siparişi alacağım
+        if( $orderId = $this->isTableHaveOrder($tableId) ){
+            //
+        }
+        // siparişin toplamını içindeki ürünlerin toplamıyla güncelleyeceğim
+        // siparişi pasif hale getireceğim
+        // masa pasif hale gelecek
+    }
+
     // sipariş ekleme
     // siparişe ürün ekleme
     // siparişten ürün silme

@@ -15,6 +15,12 @@ switch($_GET['task']){
     case "cancel":
         $orderCont->cancelTableOrder($_GET["tableId"]);
         break;
+    case "move":
+        $orderCont->moveTableOrder($_GET['fromTableId'], $_GET['tableId']);
+        break;
+    case "finish":
+        $orderCont->closeTableOrder($_GET['tableId']);
+        break;
 }
 
 header("Location: table.php?id=".$_GET['tableId'] );
