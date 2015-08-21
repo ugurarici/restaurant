@@ -41,6 +41,29 @@ if (isset($_GET["task"])) {
     <meta charset="UTF-8">
     <title>Restaurant</title>
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <script src="assets/js/jquery-1.7.2.min.js"></script>
+    <link rel="stylesheet" href="assets/js/themes/base/jquery.ui.all.css">
+    <script src="assets/js/ui/jquery.ui.core.js"></script>
+    <script src="assets/js/ui/jquery.ui.widget.js"></script>
+    <script src="assets/js/ui/jquery.ui.datepicker.js"></script>
+    <script>
+       $(document).ready(function () {
+            $(".catDelButton").click(function () {
+                var id = $(this).attr("data-id");
+                var conf = confirm("Silmek istediğinize emin misiniz?");
+                if (conf == true) {
+                    window.location = "http://localhost/pr-restaurant/menuTasks.php?task=catDelete&id=" + id;
+                }
+            });
+            $(".productDelButton").click(function () {
+               var id = $(this).attr("data-id");
+               var conf = confirm("Silmek istediğinize emin misiniz?");
+               if (conf == true) {
+                   window.location = "http://localhost/pr-restaurant/menuTasks.php?task=productDelete&id=" + id;
+               }
+           });
+        });
+    </script>
 </head>
 <body>
 <br>
@@ -61,7 +84,7 @@ if (isset($_GET["task"])) {
                         <a href="?task=catEdit&catId=<?= $cat["id"] ?>" class="btn btn-warning  btn-xs">
                             <span class="glyphicon glyphicon-pencil"></span>
                         </a>
-                        <a href="menuTasks.php?task=catDelete&id=<?= $cat["id"] ?>" class="btn btn-danger  btn-xs"><span
+                        <a href="" class="catDelButton btn btn-danger btn-xs" data-id="<?= $cat["id"] ?>"><span
                                 class="glyphicon glyphicon-trash"></span></a>
                         </span>
                     </th>
@@ -77,8 +100,8 @@ if (isset($_GET["task"])) {
                                        class="btn btn-warning  btn-xs">
                                         <span class="glyphicon glyphicon-pencil"></span>
                                     </a>
-                        <a href="menuTasks.php?task=productDelete&id=<?= $product["id"] ?>"
-                           class="btn btn-danger  btn-xs"><span class="glyphicon glyphicon-trash"></span></a>
+                        <a href=""
+                           class="btn btn-danger btn-xs productDelButton" data-id="<?=$product["id"]?>"><span class="glyphicon glyphicon-trash"></span></a>
                                     </span>
                         </td>
                     </tr>
@@ -103,8 +126,8 @@ if (isset($_GET["task"])) {
         </form>
         <hr/>
         <form action="menuTasks.php" method="post">
-            <input type="hidden" name="task" value="<?=$productTask?>">
-            <?=$productPostIdInput?>
+            <input type="hidden" name="task" value="<?= $productTask ?>">
+            <?= $productPostIdInput ?>
             <h2>Ürün</h2>
 
             <div class="form-group">
@@ -113,7 +136,8 @@ if (isset($_GET["task"])) {
                     <?php
                     foreach ($categories as $cat):
                         ?>
-                        <option value="<?= $cat["id"] ?>" <?php if($productCatId==$cat["id"]) echo " selected" ?>><?= $cat["name"] ?></option>
+                        <option
+                            value="<?= $cat["id"] ?>" <?php if ($productCatId == $cat["id"]) echo " selected" ?>><?= $cat["name"] ?></option>
                         <?php
                     endforeach;
                     ?>
@@ -122,13 +146,14 @@ if (isset($_GET["task"])) {
             <div class="input-group">
                 <span class="input-group-addon" id="basic-addon1">Ürün Adı</span>
                 <input type="text" class="form-control" placeholder="Ürün adınız giriniz..."
-                       aria-describedby="basic-addon1" name="productName" <?=$productName?>>
+                       aria-describedby="basic-addon1" name="productName" <?= $productName ?>>
             </div>
             <br/>
 
             <div class="input-group">
                 <span class="input-group-addon">Fiyat (&#8378;)</span>
-                <input type="text" class="form-control" aria-label="" placeholder="00.00" name="productPrice" <?=$productPrice?>>
+                <input type="text" class="form-control" aria-label="" placeholder="00.00"
+                       name="productPrice" <?= $productPrice ?>>
             </div>
             <br/>
 
