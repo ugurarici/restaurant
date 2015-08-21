@@ -19,7 +19,30 @@ class Menu extends Connection
         }
         return $fullMenu;
     }
-    // Kategori ekleme
+
+    public function getAllCategories(){
+        return $this->con->query("SELECT * FROM product_categories")->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function categoryAdd($catName){
+        $add = $this->con->prepare("INSERT INTO product_categories (`name`) VALUES (?)");
+    $cntrl = $add->execute(array($catName));
+
+        if($cntrl)
+            return true;
+        return false;
+    }
+
+    public function productAdd($name, $price, $catId){
+        $price = (float) str_replace(",", ".", $price);
+        $add = $this->con->prepare("INSERT INTO products (category_id,`name`,price) VALUES (?, ?, ?)");
+        $cntrl = $add->execute(array($catId, $name, $price));
+
+        if($cntrl)
+            return true;
+        return false;
+    }
+
     // Kategori düzenleme
     // Kategori silme
     // Kategori listeleme
