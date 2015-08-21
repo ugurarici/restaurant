@@ -5,6 +5,35 @@ $menuObj = new Menu();
 $menu = $menuObj->getFullMenu();
 $categories = $menuObj->getAllCategories();
 
+$catValue = "";
+$catTask = "catAdd";
+$catPostIdInput = "";
+
+$productTask = "productAdd";
+$productPostIdInput = "";
+$productName = "";
+$productPrice = "";
+$productCatId = 0;
+
+if (isset($_GET["task"])) {
+
+    if ($_GET["task"] == "catEdit") {
+        $getCat = $menuObj->getCategory($_GET["catId"]);
+        $catValue = "value='$getCat[name]'";
+        $catTask = "catEdit";
+        $catPostIdInput = '<input type="hidden" name="catId" value="' . $getCat["id"] . '" />';
+    }
+
+    if ($_GET["task"] == "productEdit") {
+        $getProduct = $menuObj->getProduct($_GET["productId"]);
+        $productTask = "productEdit";
+        $productPostIdInput = '<input type="hidden" name="productId" value="' . $getProduct["id"] . '" />';
+        $productName = "value='$getProduct[name]'";
+        $productPrice = "value='$getProduct[price]'";
+        $productCatId = $getProduct["category_id"];
+    }
+}
+
 ?>
 <!doctype html>
 <html lang="tr">
@@ -17,10 +46,10 @@ $categories = $menuObj->getAllCategories();
 <br>
 
 <div class="container">
-    <div class="row text-center"><a href="products.php" class="btn btn-warning">Ürün Yönetimi</a></div>
+    <div class="row text-center"><a href="index.php" class="btn btn-warning">Masalar</a></div>
     <hr/>
     <div class="col-sm-6">
-        <h1>Menü</h1>
+        <h2>Ürünler</h2>
         <table class="table">
             <?php
             foreach ($categories as $cat):
@@ -29,10 +58,11 @@ $categories = $menuObj->getAllCategories();
                 <tr>
                     <th><?= $cat["name"] ?>
                         <span class="pull-right">
-                        <a href="" class="btn btn-warning  btn-xs">
+                        <a href="?task=catEdit&catId=<?= $cat["id"] ?>" class="btn btn-warning  btn-xs">
                             <span class="glyphicon glyphicon-pencil"></span>
                         </a>
-                        <a href="menuTasks.php?task=catDelete&id=<?=$cat["id"]?>" class="btn btn-danger  btn-xs"><span class="glyphicon glyphicon-trash"></span></a>
+                        <a href="menuTasks.php?task=catDelete&id=<?= $cat["id"] ?>" class="btn btn-danger  btn-xs"><span
+                                class="glyphicon glyphicon-trash"></span></a>
                         </span>
                     </th>
                 </tr>
@@ -43,10 +73,12 @@ $categories = $menuObj->getAllCategories();
                         <td>
                             <?= $product['name'] ?>
                             <span class="pull-right"><?= $product['price'] ?> TL
-                                    <a href="" class="btn btn-warning  btn-xs">
+                                    <a href="?task=productEdit&productId=<?= $product["id"] ?>"
+                                       class="btn btn-warning  btn-xs">
                                         <span class="glyphicon glyphicon-pencil"></span>
                                     </a>
-                        <a href="menuTasks.php?task=productDelete&id=<?=$product["id"]?>" class="btn btn-danger  btn-xs"><span class="glyphicon glyphicon-trash"></span></a>
+                        <a href="menuTasks.php?task=productDelete&id=<?= $product["id"] ?>"
+                           class="btn btn-danger  btn-xs"><span class="glyphicon glyphicon-trash"></span></a>
                                     </span>
                         </td>
                     </tr>
@@ -60,8 +92,10 @@ $categories = $menuObj->getAllCategories();
             <h2>Kategori</h2>
 
             <div class="input-group">
-                <input type="hidden" name="task" value="catAdd">
-                <input type="text" class="form-control" placeholder="Kategori ismini giriniz..." name="catName"/>
+                <input type="hidden" name="task" value="<?= $catTask ?>">
+                <?php echo $catPostIdInput; ?>
+                <input type="text" class="form-control" placeholder="Kategori ismini giriniz..."
+                       name="catName" <?= $catValue ?> />
                 <span class="input-group-btn">
                     <input type="submit" class="btn btn-primary" type="button">
       </span>
@@ -69,16 +103,18 @@ $categories = $menuObj->getAllCategories();
         </form>
         <hr/>
         <form action="menuTasks.php" method="post">
-            <input type="hidden" name="task" value="productAdd">
+            <input type="hidden" name="task" value="<?=$productTask?>">
+            <?=$productPostIdInput?>
             <h2>Ürün</h2>
+
             <div class="form-group">
                 <label for="sel1">Kategori :</label>
                 <select class="form-control" name="catId">
                     <?php
                     foreach ($categories as $cat):
-                    ?>
-                    <option value="<?=$cat["id"]?>"><?=$cat["name"]?></option>
-                    <?php
+                        ?>
+                        <option value="<?= $cat["id"] ?>" <?php if($productCatId==$cat["id"]) echo " selected" ?>><?= $cat["name"] ?></option>
+                        <?php
                     endforeach;
                     ?>
                 </select>
@@ -86,13 +122,13 @@ $categories = $menuObj->getAllCategories();
             <div class="input-group">
                 <span class="input-group-addon" id="basic-addon1">Ürün Adı</span>
                 <input type="text" class="form-control" placeholder="Ürün adınız giriniz..."
-                       aria-describedby="basic-addon1" name="productName">
+                       aria-describedby="basic-addon1" name="productName" <?=$productName?>>
             </div>
             <br/>
 
             <div class="input-group">
                 <span class="input-group-addon">Fiyat (&#8378;)</span>
-                <input type="text" class="form-control" aria-label="" placeholder="00.00" name="productPrice">
+                <input type="text" class="form-control" aria-label="" placeholder="00.00" name="productPrice" <?=$productPrice?>>
             </div>
             <br/>
 

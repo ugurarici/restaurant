@@ -26,9 +26,37 @@ class Menu extends Connection
         return $this->con->query("SELECT * FROM product_categories")->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getCategory($catId){
+        $get = $this->con->query("SELECT * FROM product_categories WHERE id=".$catId)->fetch(PDO::FETCH_ASSOC);
+        return $get;
+    }
+
+    public function editCategory($catId, $catName){
+        $edit = $this->con->prepare("UPDATE product_categories SET name=? WHERE id=?");
+        $cntrl = $edit->execute(array($catName,$catId));
+
+        if($cntrl)
+            return true;
+        return false;
+    }
+
     public function getProductsFromCategory($catId)
     {
         return $this->con->query("SELECT * FROM products WHERE category_id=" . $catId)->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getProduct($productId){
+        return $this->con->query("SELECT * FROM products WHERE id=".$productId)->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function editProduct($productId, $catId, $productName, $productPrice){
+        $edit = $this->con->prepare("UPDATE products SET category_id=?, `name`=?, price=? WHERE id=?");
+        $cntrl = $edit->execute(array($catId, $productName, $productPrice, $productId));
+
+        if($cntrl)
+            return true;
+        return false;
+
     }
 
     public function categoryAdd($catName)
