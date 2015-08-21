@@ -11,7 +11,7 @@ $categories = $menuObj->getAllCategories();
 <head>
     <meta charset="UTF-8">
     <title>Restaurant</title>
-    <link rel="stylesheet" href="assets/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 </head>
 <body>
 <br>
@@ -23,20 +23,30 @@ $categories = $menuObj->getAllCategories();
         <h1>Menü</h1>
         <table class="table">
             <?php
-            foreach ($menu as $kat => $urunler):
+            foreach ($categories as $cat):
+                $products = $menuObj->getProductsFromCategory($cat["id"]);
                 ?>
                 <tr>
-                    <th><?= $kat ?><span class="pull-right"><?= count($urunler) ?> Ürün</span></th>
+                    <th><?= $cat["name"] ?>
+                        <span class="pull-right">
+                        <a href="" class="btn btn-warning  btn-xs">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </a>
+                        <a href="menuTasks.php?task=catDelete&id=<?=$cat["id"]?>" class="btn btn-danger  btn-xs"><span class="glyphicon glyphicon-trash"></span></a>
+                        </span>
+                    </th>
                 </tr>
                 <?php
-                foreach ($urunler as $id => $urun):
+                foreach ($products as $product):
                     ?>
                     <tr>
                         <td>
-                            <?= $urun['name'] ?>
-                            <span class="pull-right"><?= $urun['price'] ?> TL
-                                    <a href="orderTasks.php?task=add&productId=<?= $urun['id'] ?>&tableId=<?= $table['id'] ?>"
-                                       class="btn btn-primary">+</a>
+                            <?= $product['name'] ?>
+                            <span class="pull-right"><?= $product['price'] ?> TL
+                                    <a href="" class="btn btn-warning  btn-xs">
+                                        <span class="glyphicon glyphicon-pencil"></span>
+                                    </a>
+                        <a href="menuTasks.php?task=productDelete&id=<?=$product["id"]?>" class="btn btn-danger  btn-xs"><span class="glyphicon glyphicon-trash"></span></a>
                                     </span>
                         </td>
                     </tr>
