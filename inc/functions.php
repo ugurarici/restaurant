@@ -2,7 +2,7 @@
 
 function __autoload($className)
 {
-    require_once "classes/" . $className . ".php";
+    require_once "model/" . $className . ".php";
 }
 
 function dd($var)
