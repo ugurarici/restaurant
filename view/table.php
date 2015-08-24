@@ -56,12 +56,12 @@
                 $cancelStyle .= "btn-block";
             }
         ?>
-        <a class="<?=$cancelStyle?>" href="orderTasks.php?task=cancel&tableId=<?=$table["id"]?>">İptal Et</a>
+        <a class="confirmation <?=$cancelStyle?>" data-confmes="Siparişi iptal etmeyi onaylıyor musunuz?" href="orderTasks.php?task=cancel&tableId=<?=$table["id"]?>">İptal Et</a>
         <?php if(count($orderedItems)>0): ?>
         <a href="selectNewTable.php?fromTableId=<?=$table['id']?>" class="btn btn-info col-xs-6">Taşı</a>
         <br>
         <br>
-        <a href="orderTasks.php?task=finish&tableId=<?=$table['id']?>" class="btn btn-success btn-block">Hesabı Kapat</a>
+        <a href="orderTasks.php?task=finish&tableId=<?=$table['id']?>" data-confmes="Tüm ödemeyi aldığınızı ve hesabı kapattığınızı onaylıyor musunuz?" class="confirmation btn btn-success btn-block">Hesabı Kapat</a>
         <?php endif; ?>
         <?php endif; ?>
     </div>

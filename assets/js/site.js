@@ -3,10 +3,9 @@
  */
 
 $(document).ready(function () {
-    $(".catDelButton").click(function () {
-        return confirm("Kategoriyi silmeyi onaylıyor musunuz?");
-    });
-    $(".productDelButton").click(function () {
-        return confirm("Ürünü silmeyi onaylıyor musunuz?");
+    $(".confirmation").click(function () {
+        var message = "İşlemi onaylıyor musunuz?";
+        if($(this).attr("data-confmes")) message = $(this).data("confmes");
+        return confirm(message);
     });
 });

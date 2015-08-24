@@ -15,7 +15,7 @@
                         <a href="?task=catEdit&catId=<?= $cat["id"] ?>" class="btn btn-warning  btn-xs">
                             <span class="glyphicon glyphicon-pencil"></span>
                         </a>
-                        <a href="menuTasks.php?task=catDelete&id=<?= $cat["id"] ?>" class="catDelButton btn btn-danger btn-xs"><span
+                        <a href="menuTasks.php?task=catDelete&id=<?= $cat["id"] ?>" class="confirmation btn btn-danger btn-xs" data-confmes="Kategoriyi silmeyi onaylıyor musunuz?"><span
                                 class="glyphicon glyphicon-trash"></span></a>
                         </span>
                     </th>
@@ -32,7 +32,7 @@
                                         <span class="glyphicon glyphicon-pencil"></span>
                                     </a>
                         <a href="menuTasks.php?task=productDelete&id=<?= $product["id"] ?>"
-                           class="btn btn-danger btn-xs productDelButton"><span class="glyphicon glyphicon-trash" ></span></a>
+                           class="btn btn-danger btn-xs confirmation" data-confmes="Ürünü silmeyi onaylıyor musunuz?"><span class="glyphicon glyphicon-trash" ></span></a>
                                     </span>
                         </td>
                     </tr>
