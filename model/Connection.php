@@ -5,8 +5,8 @@ class Connection
 	protected $con;
 	private $host = "localhost";
 	private $dbname = "restaurant";
-	private $username = "dummyuser";
-	private $password = "123";
+	private $username = "root";
+	private $password = "";
 
 	function __construct(){
 		try{
