@@ -4,17 +4,9 @@
 
 $(document).ready(function () {
     $(".catDelButton").click(function () {
-        var id = $(this).attr("data-id");
-        var conf = confirm("Silmek istediğinize emin misiniz?");
-        if (conf == true) {
-            window.location = "http://localhost/pr-restaurant/menuTasks.php?task=catDelete&id=" + id;
-        }
+        return confirm("Kategoriyi silmeyi onaylıyor musunuz?");
     });
     $(".productDelButton").click(function () {
-        var id = $(this).attr("data-id");
-        var conf = confirm("Silmek istediğinize emin misiniz?");
-        if (conf == true) {
-            window.location = "http://localhost/pr-restaurant/menuTasks.php?task=productDelete&id=" + id;
-        }
+        return confirm("Ürünü silmeyi onaylıyor musunuz?");
     });
 });
