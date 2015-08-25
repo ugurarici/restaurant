@@ -27,25 +27,38 @@
     </div>
     <div class="col-sm-6">
         <h1>Masa <?=$table['name']?></h1>
-        <table class="table">
-            <th>Sipariş Edilenler<span class="pull-right"><?=count($orderedItems)?> Ürün</span></th>
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr class="success">
+                <th>Siparişler</th>
+                <th>Birim Fiyatı</th>
+                <th>Adet</th>
+                <th><i class="glyphicon glyphicon-erase"></i></th>
+            </tr>
+            </thead>
+            <tbody>
             <?php
             $totalPrice = 0.0;
             foreach($orderedItems as $id => $urun):
-                $totalPrice += $urun['product_price'];
-                ?>
-                <tr>
-                    <td>
-                        <?=$urun['product_name']?>
-                        <span class="pull-right"><?=$urun['product_price']?> TL
-                                    <a href="orderTasks.php?task=delete&orderProductId=<?=$urun['id']?>&tableId=<?=$table['id']?>" class="btn btn-danger">-</a>
-                                    </span>
-                    </td>
-                </tr>
+            //  $totalPrice += $urun['product_price'];
+            $totalPrice += ( $urun['total'] * $urun['product_price'] );
+            ?>
+            <tr>
+                <td><?=$urun['product_name']?></td>
+                <td><?=$urun['product_price']?> TL</td>
+                <td>(x<?=$urun['total']?>)</td>
+                <td><a href="<?=$sitePath; ?>orderTasks.php?task=delete&orderProductId=<?=$urun['id']?>&tableId=<?=$table['id']?>" class="btn btn-danger">-</a></td>
+            </tr>
             <?php endforeach; ?>
             <tr>
-                <th>Toplam Tutar <span class="pull-right"><?=$totalPrice?> TL</span></th>
+                <th>Toplam Tutar </th>
+                <td colspan="3"><span class="pull-right"><?=$totalPrice?> TL</span></td>
             </tr>
+
+
+            </tbody>
+
+
         </table>
         <?php if($table["status"]=="1"): ?>
         <?php
