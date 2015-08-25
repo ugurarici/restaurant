@@ -60,7 +60,8 @@ class Order extends Connection
         if (!$orderId = $this->isTableHaveOrder($tableId)) {
             return $items;
         }
-        $orderItems = $this->con->query("SELECT * FROM order_products WHERE order_id = " . $orderId)->fetchAll(PDO::FETCH_ASSOC);
+       // Aynı sipariş sayısı kontrol etmek için COUNT a ihtiyacım oldu
+       $orderItems = $this->con->query("SELECT *, COUNT(*) as total FROM order_products WHERE order_id = " . $orderId . " GROUP BY product_name")->fetchAll(PDO::FETCH_ASSOC);
         //die(var_dump($orderItems));
         return $orderItems;
     }
