@@ -4,13 +4,14 @@ include("ayar.php");
 ob_start();
 session_start();
 
-$sifre = $_POST['sifre'];
+$sifre = md5($_POST['sifre']);
 
 $sql_check = mysql_query("select * from users where  password='".$sifre."' ") or die(mysql_error());
 
 if(mysql_num_rows($sql_check))  {
     $_SESSION["login"] = "true";
     $_SESSION["pass"] = $sifre;
+
     header("Location:admin.php");
 }
 else {
