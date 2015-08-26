@@ -1,6 +1,6 @@
 <?php
 $host="localhost";
-$db="mydb";
+$db="restaurant";
 $user="root";
 $pass="";
 $conn=@mysql_connect($host,$user,$pass) or die("Mysql Baglanamadi");
