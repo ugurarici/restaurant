@@ -1,8 +1,4 @@
 <?php
-require "inc/global.php";
+require  "view/first.php";
 
-require "controller/index.php";
-
-require "view/_header.php";
-require "view/tables.php";
-require "view/_footer.php";
+?>
