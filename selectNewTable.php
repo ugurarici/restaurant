@@ -1,12 +1,8 @@
 <?php
-
 require_once "inc/global.php";
-
 $fromTableId = $_GET['fromTableId'];
 if(! $fromTableId) header("Location: index.php");
-
 $tblObj = new Table();
-
 ?>
 <?php require "view/_header.php"; ?>
 <div class="container">
