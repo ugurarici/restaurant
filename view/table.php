@@ -1,39 +1,52 @@
 
 <div class="container">
-    <div class="row"><a href="index.php" class="btn btn-warning">&lt; Geri</a></div>
+    <div class="row"><a href="index.php" class="btn btn-warning"><i class="glyphicon glyphicon-arrow-left"></i>  Geri</a></div>
     <div class="col-sm-6">
         <h1>Menü</h1>
-        <table class="table">
+
+        <div class="input-group"> <span class="input-group-addon bgFix"><i class="glyphicon glyphicon-search"></i> Filtere: </span>
+
+            <input id="filter" type="text" class="form-control" placeholder="Ürün veya kategori filtrele...">
+        </div>
+        <table class="table table-bordered table-striped">
             <?php
                 foreach($menu as $kat => $urunler):
             ?>
-                    <tr>
-                        <th><?=$kat?><span class="pull-right"><?=count($urunler)?> Ürün</span></th>
-                    </tr>
+                    <thead class="searchOrder">
+                        <tr class="bg-success">
+                            <th><?=$kat?></th>
+                            <th style="width:17%;">Birim Fiyat </th>
+                            <th style="width:26%;"> Toplam Ürün : <span class="badge"><?=count($urunler)?></span></th>
+                        </tr>
+                    </thead>
                     <?php
                         foreach($urunler as $id => $urun):
                     ?>
+                   <tbody class="searchOrder">
                             <tr>
                                 <td>
                                     <?=$urun['name']?>
-                                    <span class="pull-right"><?=$urun['price']?> TL
-                                    <a href="orderTasks.php?task=add&productId=<?=$urun['id']?>&tableId=<?=$table['id']?>" class="btn btn-primary">+</a>
-                                    </span>
+                                </td>
+                                <td class="text-center"><?=$urun['price']?> TL</td>
+                                <td class="text-center">
+                                    <a href="<?=$sitePath; ?>orderTasks.php?task=add&productId=<?=$urun['id']?>&tableId=<?=$table['id']?>" class="btn btn-primary">+</a>
                                 </td>
                             </tr>
+                     </tbody>
                     <?php endforeach; ?>
             <?php endforeach; ?>
         </table>
     </div>
     <div class="col-sm-6">
         <h1>Masa <?=$table['name']?></h1>
+
         <table class="table table-bordered table-striped">
             <thead>
             <tr class="success">
                 <th>Siparişler</th>
-                <th>Birim Fiyatı</th>
-                <th>Adet</th>
-                <th><i class="glyphicon glyphicon-erase"></i></th>
+                <th style="width:19%;">Birim Fiyatı</th>
+                <th class="text-center">Adet</th>
+                <th class="text-center"><i class="glyphicon glyphicon-erase"></i></th>
             </tr>
             </thead>
             <tbody>
@@ -45,9 +58,9 @@
             ?>
             <tr>
                 <td><?=$urun['product_name']?></td>
-                <td><?=$urun['product_price']?> TL</td>
-                <td>(x<?=$urun['total']?>)</td>
-                <td><a href="<?=$sitePath; ?>orderTasks.php?task=delete&orderProductId=<?=$urun['id']?>&tableId=<?=$table['id']?>" class="btn btn-danger">-</a></td>
+                <td class="text-center"><?=$urun['product_price']?> TL</td>
+                <td class="text-center">(x<?=$urun['total']?>)</td>
+                <td class="text-center"><a href="<?=$sitePath; ?>orderTasks.php?task=delete&orderProductId=<?=$urun['id']?>&tableId=<?=$table['id']?>" class="btn btn-danger">-</a></td>
             </tr>
             <?php endforeach; ?>
             <tr>
@@ -60,6 +73,8 @@
 
 
         </table>
+
+
         <?php if($table["status"]=="1"): ?>
         <?php
             $cancelStyle = "btn btn-danger ";
@@ -69,14 +84,13 @@
                 $cancelStyle .= "btn-block";
             }
         ?>
-        <a class="confirmation <?=$cancelStyle?>" data-confmes="Siparişi iptal etmeyi onaylıyor musunuz?" href="orderTasks.php?task=cancel&tableId=<?=$table["id"]?>">İptal Et</a>
+        <a class="confirmation <?=$cancelStyle?>" data-confmes="Siparişi iptal etmeyi onaylıyor musunuz?" href="<?=$sitePath; ?>orderTasks.php?task=cancel&tableId=<?=$table["id"]?>"><i class="glyphicon glyphicon-remove"></i> İptal Et</a>
         <?php if(count($orderedItems)>0): ?>
-        <a href="selectNewTable.php?fromTableId=<?=$table['id']?>" class="btn btn-info col-xs-6">Taşı</a>
+        <a href="<?=$sitePath; ?>selectNewTable.php?fromTableId=<?=$table['id']?>" class="btn btn-info col-xs-6"><i class="glyphicon glyphicon-move"> </i> Taşı</a>
         <br>
         <br>
-        <a href="orderTasks.php?task=finish&tableId=<?=$table['id']?>" data-confmes="Tüm ödemeyi aldığınızı ve hesabı kapattığınızı onaylıyor musunuz?" class="confirmation btn btn-success btn-block">Hesabı Kapat</a>
+        <a href="<?=$sitePath; ?>orderTasks.php?task=finish&tableId=<?=$table['id']?>" data-confmes="Tüm ödemeyi aldığınızı ve hesabı kapattığınızı onaylıyor musunuz?" class="confirmation btn btn-success btn-block"><i class="glyphicon glyphicon-saved"></i> Hesabı Kapat</a>
         <?php endif; ?>
         <?php endif; ?>
     </div>
 </div>
-
