@@ -68,10 +68,7 @@
                 <td colspan="3"><span class="pull-right"><?=$totalPrice?> TL</span></td>
             </tr>
 
-
             </tbody>
-
-
         </table>
 
 
