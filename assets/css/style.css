@@ -1,0 +1,20 @@
+/*
+View/table.php
+Filtreleme alanındaki input arkaplanı düzeltimi için
+*/
+.bgFix {background-color: #5BC0DE!important; color: #fff!important;}
+
+/*
+ Buton stilleri düzeltimi için
+*/
+.btn-default,.btn-primary,.btn-success,.btn-info,.btn-warning,.btn-danger {
+    -webkit-box-shadow: 2px 3px 0px rgba(4, 4, 4, 0.3);
+    -moz-box-shadow:    2px 3px 0px rgba(4, 4, 4, 0.3);
+    box-shadow:         2px 3px 0px rgba(4, 4, 4, 0.3);
+    border-radius:0;
+}
+
+.btn-default:active,.btn-primary:active,.btn-success:active,.btn-info:active,.btn-warning:active,.btn-danger:active {
+    margin-top: 3px;
+    margin-bottom: -3px;
+}
