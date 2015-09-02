@@ -1,6 +1,6 @@
 
 <div class="container">
-    <div class="row text-center"><a href="index.php" class="btn btn-warning">Masalar</a></div>
+    <div class="row text-center"><a href="<?=$sitePath?>index.php" class="btn btn-warning">Masalar</a></div>
     <hr/>
     <div class="col-sm-6">
         <h2>Ürünler</h2>
@@ -15,7 +15,7 @@
                         <a href="?task=catEdit&catId=<?= $cat["id"] ?>" class="btn btn-warning  btn-xs">
                             <span class="glyphicon glyphicon-pencil"></span>
                         </a>
-                        <a href="menuTasks.php?task=catDelete&id=<?= $cat["id"] ?>" class="confirmation btn btn-danger btn-xs" data-confmes="Kategoriyi silmeyi onaylıyor musunuz?"><span
+                        <a href="<?=$sitePath?>menuTasks.php?task=catDelete&id=<?= $cat["id"] ?>" class="confirmation btn btn-danger btn-xs" data-confmes="Kategoriyi silmeyi onaylıyor musunuz?"><span
                                 class="glyphicon glyphicon-trash"></span></a>
                         </span>
                     </th>
@@ -31,7 +31,7 @@
                                        class="btn btn-warning  btn-xs">
                                         <span class="glyphicon glyphicon-pencil"></span>
                                     </a>
-                        <a href="menuTasks.php?task=productDelete&id=<?= $product["id"] ?>"
+                        <a href="<?=$sitePath?>menuTasks.php?task=productDelete&id=<?= $product["id"] ?>"
                            class="btn btn-danger btn-xs confirmation" data-confmes="Ürünü silmeyi onaylıyor musunuz?"><span class="glyphicon glyphicon-trash" ></span></a>
                                     </span>
                         </td>
@@ -42,7 +42,7 @@
     </div>
 
     <div class="col-sm-6">
-        <form action="menuTasks.php" method="post">
+        <form action="<?=$sitePath?>menuTasks.php" method="post">
             <h2>Kategori</h2>
 
             <div class="input-group">
@@ -56,15 +56,16 @@
             </div>
         </form>
         <hr/>
-        <form action="menuTasks.php" method="post">
+        <form action="<?=$sitePath?>menuTasks.php" method="post">
             <input type="hidden" name="task" value="<?= $productTask ?>">
             <?= $productPostIdInput ?>
             <h2>Ürün</h2>
 
             <div class="form-group">
                 <label for="sel1">Kategori :</label>
-                <select class="form-control" name="catId">
-                    <?php
+                <label>
+                    <select class="form-control" name="catId">
+                        <?php
                     foreach ($categories as $cat):
                         ?>
                         <option
@@ -72,7 +73,8 @@
                         <?php
                     endforeach;
                     ?>
-                </select>
+                    </select>
+                </label>
             </div>
             <div class="input-group">
                 <span class="input-group-addon" id="basic-addon1">Ürün Adı</span>
