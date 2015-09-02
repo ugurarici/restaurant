@@ -8,4 +8,19 @@ $(document).ready(function () {
         if($(this).attr("data-confmes")) message = $(this).data("confmes");
         return confirm(message);
     });
+
+    (function ($) {
+
+        $('#filter').keyup(function () {
+
+            var rex = new RegExp($(this).val(), 'i');
+            $('.searchOrder tr').hide();
+            $('.searchOrder tr').filter(function () {
+                return rex.test($(this).text());
+            }).show();
+
+        })
+
+    }(jQuery));
+
 });
