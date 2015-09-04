@@ -18,3 +18,142 @@ Filtreleme alanındaki input arkaplanı düzeltimi için
     margin-top: 3px;
     margin-bottom: -3px;
 }
+
+
+.row{
+    margin-left:0;
+    margin-right:0;
+}
+
+#adminWrapper {
+    padding-left: 70px;
+    transition: all .4s ease 0s;
+    height: 100%
+}
+
+#sidebar-wrapper {
+    margin-left: -150px;
+    left: 70px;
+    width: 150px;
+    background: #555;
+    position: fixed;
+    height: 100%;
+    z-index: 10000;
+    transition: all .4s ease 0s;
+}
+
+.sidebar-nav {
+    display: block;
+    float: left;
+    width: 150px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+#page-content-wrapper {
+    padding-left: 0;
+    margin-left: 0;
+    width: 100%;
+    height: auto;
+}
+#adminWrapper.active {
+    padding-left: 150px;
+}
+#adminWrapper.active #sidebar-wrapper {
+    left: 150px;
+}
+
+#page-content-wrapper {
+    width: 100%;
+}
+
+#sidebar_menu li a, .sidebar-nav li a {
+    color: #ccc;
+    display: block;
+    float: left;
+    text-decoration: none;
+    width: 150px;
+    background: #565656;
+    border-top: 1px solid #575757;
+    border-bottom: 1px solid #666;
+    -webkit-transition: background .5s;
+    -moz-transition: background .5s;
+    -o-transition: background .5s;
+    -ms-transition: background .5s;
+    transition: background .5s;
+}
+.sidebar_name {
+    padding-top: 25px;
+    color: #fff;
+    opacity: .7;
+}
+
+.sidebar-nav li {
+    line-height: 40px;
+    text-indent: 10px;
+}
+
+.sidebar-nav li a {
+    color: #ccc;
+    display: block;
+    text-decoration: none;
+}
+
+.sidebar-nav li a:hover {
+    color: #fff;
+    background: #369;
+    text-decoration: none;
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+    text-decoration: none;
+}
+
+.sidebar-nav > .sidebar-brand {
+    height: 65px;
+    line-height: 60px;
+    font-size: 18px;
+}
+
+.sidebar-nav > .sidebar-brand a {
+    color: #999999;
+}
+
+.sidebar-nav > .sidebar-brand a:hover {
+    color: #fff;
+    background: none;
+}
+
+#main_icon
+{
+    float:right;
+    padding-right: 35px;
+    padding-top:20px;
+}
+.sub_icon
+{
+    float:right;
+    padding-right: 35px;
+    padding-top:10px;
+}
+.content-header {
+    height: 65px;
+    line-height: 65px;
+}
+
+.content-header h1 {
+    margin: 0;
+    margin-left: 20px;
+    line-height: 65px;
+    display: inline-block;
+}
+
+.centered {
+    float: none;
+    margin:50px auto;
+}
+
+p {padding: 15px;}
+
+.container {margin-top: 50px;}

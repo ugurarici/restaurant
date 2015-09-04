@@ -1,0 +1,18 @@
+/* Admin Paneli için */
+@media (max-width:767px) {
+    #adminWrapper {
+        padding-left: 70px;
+        transition: all .4s ease 0s;
+    }
+    #sidebar-wrapper {
+        left: 70px;
+    }
+    #adminWrapper.active {
+        padding-left: 150px;
+    }
+    #adminWrapper.active #sidebar-wrapper {
+        left: 150px;
+        width: 150px;
+        transition: all .4s ease 0s;
+    }
+}

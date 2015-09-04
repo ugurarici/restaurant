@@ -1,9 +1,21 @@
 <?php
 $usrObj = new User();
+$userCount = $usrObj->getAllUserCount();
+$order = new Order();
+$orderCount = $order->getAllOrdersCount();
+$menuObj = new Menu();
+$productCount = $menuObj->getAllProductCount();
+$categoryCount = $menuObj->getAllCategoriesCount();
 if ($usrObj->isLoggedIn() == "" ) {
     $usrObj->redirect('login.php');
+}else {
+    $users = $usrObj->getAllUsers();
+    $userId = $_SESSION['user_session'];
+    $userInfo = $usrObj->getOneUser($userId);
+    if ($userInfo["user_position"] != 1){
+        $usrObj->redirect('login.php');
+    }
 }
-$menuObj = new Menu();
 $menu = $menuObj->getFullMenu();
 $categories = $menuObj->getAllCategories();
 $catValue = "";
@@ -15,12 +27,6 @@ $productName = "";
 $productPrice = "";
 $productCatId = 0;
 if (isset($_GET["task"])) {
-    if ($_GET["task"] == "catEdit") {
-        $getCat = $menuObj->getCategory($_GET["catId"]);
-        $catValue = "value='$getCat[name]'";
-        $catTask = "catEdit";
-        $catPostIdInput = '<input type="hidden" name="catId" value="' . $getCat["id"] . '" />';
-    }
     if ($_GET["task"] == "productEdit") {
         $getProduct = $menuObj->getProduct($_GET["productId"]);
         $productTask = "productEdit";

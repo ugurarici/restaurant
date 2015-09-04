@@ -2,6 +2,10 @@
 require_once "inc/global.php";
 
 $orderCont = new Order();
+$usrObj = new User();
+//İşlemi en son kimin yaptığını kayıt etmek için session ile id alıyoruz
+$userId = $_SESSION['user_session'];
+$userInfo = $usrObj->getOneUser($userId);
 
 switch($_GET['task']){
     case "add":
@@ -19,7 +23,7 @@ switch($_GET['task']){
         $orderCont->moveTableOrder($_GET['fromTableId'], $_GET['tableId']);
         break;
     case "finish":
-        $orderCont->closeTableOrder($_GET['tableId']);
+        $orderCont->closeTableOrder($_GET['tableId'], $userInfo["id"]);
         break;
 }
 
