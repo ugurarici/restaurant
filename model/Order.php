@@ -1,4 +1,5 @@
 <?php
+
 class Order extends Connection
 {
     // masadaki siparişe ürün ekleme
@@ -16,6 +17,7 @@ class Order extends Connection
         // ürün değerleriyle beraber sipariş ürünleri tablosuna eklenir
         return $this->addProductToOrder($productId, $orderId);
     }
+
     private function isTableHaveOrder($tableId)
     {
         // SELECT id FROM orders WHERE status = 1 AND table_id = $tableId
@@ -25,6 +27,7 @@ class Order extends Connection
         if (is_array($isTableHaveOrder)) return $isTableHaveOrder['id'];
         return $isTableHaveOrder;
     }
+
     private function createOrder($tableId)
     {
         // masa id'si gelir, bu id ile yeni bir sipariş açarız
@@ -37,6 +40,7 @@ class Order extends Connection
         }
         return false;
     }
+
     private function addProductToOrder($productId, $orderId)
     {
         // order_products tablosuna ürün bilgilerini siparişe bağlı olarak ekleyeceğiz
@@ -47,6 +51,7 @@ class Order extends Connection
         }
         return false;
     }
+
     public function getTableOrderedItems($tableId)
     {
         // sipariş edilmiş ürünleri dizi içinde döndürür
@@ -60,6 +65,7 @@ class Order extends Connection
         //die(var_dump($orderItems));
         return $orderItems;
     }
+
     public function deleteProductFromOrder($orderProductId)
     {
         // DELETE FROM order_products WHERE id = $orderProductId
@@ -67,6 +73,7 @@ class Order extends Connection
         if ($delete > 0) return $delete;
         return false;
     }
+
     public function cancelTableOrder($tableId)
     {
         // masa siparişini yakala
@@ -77,6 +84,7 @@ class Order extends Connection
             $tableCont->deactive($tableId);
         }
     }
+
     private function deleteOrder($orderId)
     {
         $deleteOrder = $this->con->exec("DELETE FROM orders WHERE id=" . $orderId);
@@ -86,6 +94,7 @@ class Order extends Connection
         }
         return false;
     }
+
     public function moveTableOrder($fromTableId, $toTableId)
     {
         // siparişin table_id'sini değiştireceğiz
@@ -100,21 +109,27 @@ class Order extends Connection
             $tblCont->active($toTableId);
         }
     }
+
     public function closeTableOrder($tableId,$userID)
     {
         if ($orderId = $this->isTableHaveOrder($tableId)) {
+
             // fiyatları güncelle
             $edit = $this->con->exec("update orders set total_amount=(select sum(product_price) from order_products where order_id=$orderId),user_id=$userID where id=$orderId");
+
             // siparişi pasif yap
             $this->deactive($orderId);
+
             // tabloyu pasif yap
             $tableCont = new Table();
             $tableCont->deactive($tableId);
+
             if($edit==0)
                 return false;
             return true;
         }
     }
+
     private function changeStatus($orderId, $status)
     {
         $chst = $this->con->query("UPDATE orders SET status=" . $status . " WHERE id=" . $orderId);
@@ -122,15 +137,23 @@ class Order extends Connection
             return true;
         }
         return false;
+
     }
+
     public function deactive($orderId)
     {
         return $this->changeStatus($orderId, 0);
     }
+
     public function active($orderId)
     {
         return $this->changeStatus($orderId, 1);
     }
+    public function getAllOrdersCount(){
+        $getAllOrdersCount = $this->con->query('SELECT COUNT(id) FROM orders')->fetch(PDO::FETCH_ASSOC);
+        return $getAllOrdersCount;
+    }
+
     // sipariş ekleme
     // siparişe ürün ekleme
     // siparişten ürün silme
