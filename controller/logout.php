@@ -1,5 +1,6 @@
 <?php
 $usrObj = new User();
+
 if(isset($_GET['logOut']) && $_GET['logOut']=="true")
 {
 	$usrObj->logOut();

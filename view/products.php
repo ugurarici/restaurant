@@ -51,7 +51,7 @@
                 <input type="text" class="form-control" placeholder="Kategori ismini giriniz..."
                        name="catName" <?= $catValue ?> />
                 <span class="input-group-btn">
-                    <input type="submit" class="btn btn-primary" type="button">
+                    <input type="submit" class="btn btn-primary">
       </span>
             </div>
         </form>
@@ -68,8 +68,7 @@
                         <?php
                     foreach ($categories as $cat):
                         ?>
-                        <option
-                            value="<?= $cat["id"] ?>" <?php if ($productCatId == $cat["id"]) echo " selected" ?>><?= $cat["name"] ?></option>
+                        <option value="<?= $cat["id"] ?>" <?php if ($productCatId == $cat["id"]) echo " selected" ?>><?= $cat["name"] ?></option>
                         <?php
                     endforeach;
                     ?>
@@ -78,15 +77,13 @@
             </div>
             <div class="input-group">
                 <span class="input-group-addon" id="basic-addon1">Ürün Adı</span>
-                <input type="text" class="form-control" placeholder="Ürün adınız giriniz..."
-                       aria-describedby="basic-addon1" name="productName" <?= $productName ?>>
+                <input type="text" class="form-control" placeholder="Ürün adınız giriniz..." aria-describedby="basic-addon1" name="productName" <?= $productName ?>>
             </div>
             <br/>
 
             <div class="input-group">
                 <span class="input-group-addon">Fiyat (&#8378;)</span>
-                <input type="text" class="form-control" aria-label="" placeholder="00.00"
-                       name="productPrice" <?= $productPrice ?>>
+                <input type="text" class="form-control" aria-label="" placeholder="00.00" name="productPrice" <?= $productPrice ?>>
             </div>
             <br/>
 
