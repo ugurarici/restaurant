@@ -10,3 +10,4 @@ require_once "functions.php";
  * ziyaretci oluyor.
  */
 $sitePath = "http://".$_SERVER["HTTP_HOST"].dirname($_SERVER["PHP_SELF"])."/";
+//dirname = Belirtilen dosya yolunun dizin bileşenini döndürür.

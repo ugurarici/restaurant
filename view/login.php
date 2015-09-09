@@ -1,12 +1,12 @@
 <div class="col-sm-6 centered">
     <h1>Personel Girişi</h1>
-    <form action="<?=$sitePath?>userTasks.php" method="POST">
+    <form action="<?=$sitePath?>userTasks.php?task=login" method="POST">
         <?php
         if(isset ($_GET['error']) == "login")
         {
             ?>
             <div class="alert alert-danger">
-                <i class="glyphicon glyphicon-warning-sign"></i> &nbsp; <?php echo "Ama öyle giriş yapmayacaktınız! Lütfen tekrar deneyiniz!"; ?> !
+                <i class="glyphicon glyphicon-warning-sign"></i> &nbsp; <?php echo "Ama öyle giriş yapmayacaktınız! Lütfen tekrar deneyiniz!"; ?>
             </div>
         <?php
         }

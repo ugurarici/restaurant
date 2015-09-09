@@ -10,12 +10,12 @@
             foreach ($users as $usr):
                 ?>
                 <tr>
-                    <td><?= $usr["username"] ?>
+                    <td><b><?= $usr["username"] ?></b> (<?= $usr["fullname"] ?>)
                         <span class="pull-right">
-                        <a href="?task=catEdit&catId=<?= $usr["id"] ?>" class="btn btn-warning  btn-xs">
+                        <a href="?task=userEdit&userId=<?= $usr["id"] ?>" class="btn btn-warning  btn-xs">
                             <span class="glyphicon glyphicon-pencil"></span>
                         </a>
-                        <a href="<?=$sitePath?>categoriTasks.php?task=catDelete&id=<?= $usr["id"] ?>" class="confirmation btn btn-danger btn-xs" data-confmes="Kategoriyi silmeyi onaylıyor musunuz?"><span
+                        <a href="<?=$sitePath?>userTasks.php?task=userDelete&id=<?= $usr["id"] ?>" class="confirmation btn btn-danger btn-xs" data-confmes="Kategoriyi silmeyi onaylıyor musunuz?"><span
                                 class="glyphicon glyphicon-trash"></span></a>
                         </span>
                     </td>
@@ -24,6 +24,12 @@
         </table>
     </div>
 
-    
+    <?php
+    if(isset($_GET['task']) == "userEdit"){
+        include "editUser.php";
+      }else {
+        include "register.php";
+    }
+    ?>
 
 </div>

@@ -2,6 +2,7 @@
     <!-- Sidebar -->
     <?php
          include "_adminSidebarAndHeader.php";
+
      ?>
         <div class="row">
             <div class="col-lg-3 col-md-6">

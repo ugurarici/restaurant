@@ -1,5 +1,6 @@
 <?php
 $usrObj = new User();
+
 if ($usrObj->isLoggedIn() == "" ) {
     $usrObj->redirect('login.php');
 }

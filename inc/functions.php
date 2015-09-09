@@ -4,11 +4,13 @@ function __autoload($className)
 {
     require_once "model/" . $className . ".php";
 }
+
 function dd($var)
 {
     echo "<pre>";
     die(var_dump($var) . "</pre>");
 }
+
 function fixTags($text){
     $text = htmlspecialchars($text);
     $text = preg_replace("/=/", "=\"\"", $text);
@@ -19,8 +21,10 @@ function fixTags($text){
     $text = preg_replace("/=\"\"/", "=", $text);
     return $text;
 }
+
 function redirect($url)
 {
     header("Location: $url");
     exit;
 }
+

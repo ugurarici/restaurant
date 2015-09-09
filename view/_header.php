@@ -11,6 +11,3 @@
     <script src="<?=$sitePath?>assets/js/site.js"></script>
 </head>
 <body>
-
-<br />
-<br />
