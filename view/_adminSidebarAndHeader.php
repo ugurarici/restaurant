@@ -1,6 +1,6 @@
 <div id="sidebar-wrapper">
     <ul id="sidebar_menu" class="sidebar-nav">
-        <li class="sidebar-brand"><a id="menu-toggle" href="#">Menu<span id="main_icon" class="glyphicon glyphicon-align-justify"></span></a></li>
+        <li class="sidebar-brand"><a id="menu-toggle" href="#">Menu<span id="main_icon" class="glyphicon glyphicon-resize-horizontal"></span></a></li>
     </ul>
     <ul class="sidebar-nav" id="sidebar">
         <li><a href="index.php">Site Giriş<span class="sub_icon glyphicon glyphicon-home"></span></a></li>
