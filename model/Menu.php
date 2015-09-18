@@ -106,6 +106,14 @@ class Menu extends Connection
             return true;
         return false;
     }
+    public function getAllProductCount(){
+        $getAllProductCount = $this->con->query('SELECT COUNT(id) FROM products')->fetch(PDO::FETCH_ASSOC);
+        return $getAllProductCount;
+    }
+    public function getAllCategoriesCount(){
+        $getAllCatCount = $this->con->query('SELECT COUNT(id) FROM product_categories')->fetch(PDO::FETCH_ASSOC);
+        return $getAllCatCount;
+    }
 
     // Kategori düzenleme
     // Kategori silme
