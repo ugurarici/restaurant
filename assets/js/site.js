@@ -23,4 +23,9 @@ $(document).ready(function () {
 
     }(jQuery));
 
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#adminWrapper").toggleClass("active");
+    });
+
 });
