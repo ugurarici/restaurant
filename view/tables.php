@@ -14,13 +14,20 @@
         <?php
          elseif ($userInfo["user_position"] == 2):
         ?>
-        <div class="row text-center"><a href="products.php" class="btn btn-warning">Ürün Yönetimi</a></div>
-        <label class="pull-right"><a href="<?=$sitePath?>logout.php?logOut=true"><i class="glyphicon glyphicon-log-out"></i> Çıkış Yap</a></label>
+        <div class="row text-center">
+            <p class="pull-left"> Hoşgeldin <b><?=$userInfo["fullname"]; ?>,</b></p>
+            <a href="products.php" class="btn btn-warning">Ürün Yönetimi</a>
+            <label class="pull-right"><a href="<?=$sitePath?>logout.php?logOut=true"><i class="glyphicon glyphicon-log-out"></i> Çıkış Yap</a></label>
+        </div>
         <?php
         else:
         ?>
+        <div class="row">
+            <p class="pull-left"> Hoşgeldin <b><?=$userInfo["fullname"]; ?>,</b></p>
             <label class="pull-right"><a href="<?=$sitePath?>logout.php?logOut=true"><i class="glyphicon glyphicon-log-out"></i> Çıkış Yap</a></label>
+        </div>
         <?php
+
         endif;
         ?>
 

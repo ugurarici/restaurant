@@ -65,6 +65,11 @@ class Order extends Connection
         //die(var_dump($orderItems));
         return $orderItems;
     }
+    
+     public function getAllOrdersCount(){
+        $getAllOrdersCount = $this->con->query('SELECT COUNT(id) FROM orders')->fetch(PDO::FETCH_ASSOC);
+        return $getAllOrdersCount;
+   }
 
     public function deleteProductFromOrder($orderProductId)
     {
@@ -148,10 +153,6 @@ class Order extends Connection
     public function active($orderId)
     {
         return $this->changeStatus($orderId, 1);
-    }
-    public function getAllOrdersCount(){
-        $getAllOrdersCount = $this->con->query('SELECT COUNT(id) FROM orders')->fetch(PDO::FETCH_ASSOC);
-        return $getAllOrdersCount;
     }
 
     // sipariş ekleme
