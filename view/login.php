@@ -43,6 +43,7 @@
                 <td></td>
                 <td class="text-center">
                     <label>
+                    <input type="hidden" name="task" value="login">
                         <input class="btn btn-warning" type="submit" name="submit" value="Yetkili Girişi Yap"/>
                     </label>
                 </td>
